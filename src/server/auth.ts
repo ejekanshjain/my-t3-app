@@ -8,6 +8,8 @@ import {
 import EmailProvider from 'next-auth/providers/email'
 import { prisma } from '~/server/db'
 
+// type UserRole = 'ADMIN' | 'USER'
+
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -27,8 +29,6 @@ declare module 'next-auth' {
   //   // ...other properties
   //   // role: UserRole
   // }
-
-  // type UserRole = 'ADMIN' | 'USER'
 }
 
 /**
