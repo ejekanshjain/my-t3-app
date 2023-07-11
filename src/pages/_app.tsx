@@ -3,8 +3,8 @@ import { SessionProvider } from 'next-auth/react'
 import type { AppType } from 'next/app'
 import { Router } from 'next/router'
 import NProgress from 'nprogress'
+import '~/styles/globals.css'
 import { api } from '~/utils/api'
-import '../styles/globals.css'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())

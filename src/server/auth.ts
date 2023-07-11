@@ -38,27 +38,36 @@ declare module 'next-auth' {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session({ session, user, token }) {
-      if (session.user) {
-        if (user) {
-          session.user.id = user.id
-          // put other properties on the session here
-          // session.user.role = user.role
-        }
-        if (token?.user) {
-          session.user.id = (token.user as { id: string }).id
-          // also dont forget to add other properties here
-          // session.user.role = (token.user as { id: string; role: UserRole }).role
+    session({ session, user /* , token */ }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id
         }
       }
-      return session
+      // use below for token when not using prisma adapter
+      // if (session.user) {
+      //   if (user) {
+      //     session.user.id = user.id
+      //     // put other properties on the session here
+      //     // session.user.role = user.role
+      //   }
+      //   if (token?.user) {
+      //     session.user.id = (token.user as { id: string }).id
+      //     // also dont forget to add other properties here
+      //     // session.user.role = (token.user as { id: string; role: UserRole }).role
+      //   }
+      // }
+      // return session
     },
     jwt({ token, user }) {
       user && (token.user = user)
       return token
     }
   },
-  adapter: PrismaAdapter(prisma), // comment this out when using credentials provider or disable database persistence
+  // comment this below when using credentials provider or disable database persistence
+  adapter: PrismaAdapter(prisma),
   providers: [
     // uncomment this to enable the credentials provider
     // CredentialsProvider({
@@ -109,6 +118,15 @@ export const authOptions: NextAuthOptions = {
       },
       from: process.env.EMAIL_FROM
     })
+    /**
+     * ...add more providers here.
+     *
+     * Most other providers require a bit more work than the Discord provider. For example, the
+     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
+     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
+     *
+     * @see https://next-auth.js.org/providers/github
+     */
   ]
 }
 

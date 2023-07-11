@@ -6,7 +6,6 @@
     "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "importsNotUsedAsValues": "error",
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
