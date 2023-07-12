@@ -7,6 +7,7 @@
     "lint": "next lint",
     "dev": "next dev",
     "build": "next build",
+    "build:docker": "docker build -t ejekanshjain/nextjs:1.0.0 .",
     "start": "next start",
     "prisma:push": "prisma db push",
     "prisma:gen": "prisma generate",
