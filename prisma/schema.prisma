@@ -1,7 +1,5 @@
 generator client {
     provider = "prisma-client-js"
-    // Uncomment the line below if you want to use experimental json protocol for prisma instead of graphql bindings
-    // previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
