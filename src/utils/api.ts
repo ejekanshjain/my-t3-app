@@ -42,6 +42,14 @@ export const api = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`
         })
       ]
+      // react-query options uncomment if you dont want to refetch queries on window focus
+      // queryClientConfig: {
+      //   defaultOptions: {
+      //     queries: {
+      //       refetchOnWindowFocus: false
+      //     }
+      //   }
+      // }
     }
   },
   /**
