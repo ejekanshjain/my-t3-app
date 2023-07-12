@@ -38,28 +38,15 @@ declare module 'next-auth' {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session({ session, user /* , token */ }) {
+    session({ session, user, token }) {
       return {
         ...session,
         user: {
           ...session.user,
-          id: user.id
+          ...user,
+          ...(token?.user ? token.user : {})
         }
       }
-      // use below for token when not using prisma adapter
-      // if (session.user) {
-      //   if (user) {
-      //     session.user.id = user.id
-      //     // put other properties on the session here
-      //     // session.user.role = user.role
-      //   }
-      //   if (token?.user) {
-      //     session.user.id = (token.user as { id: string }).id
-      //     // also dont forget to add other properties here
-      //     // session.user.role = (token.user as { id: string; role: UserRole }).role
-      //   }
-      // }
-      // return session
     },
     jwt({ token, user }) {
       user && (token.user = user)
