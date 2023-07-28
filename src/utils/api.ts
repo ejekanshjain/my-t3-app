@@ -4,11 +4,11 @@
  *
  * We also create a few inference helpers for input and output types.
  */
+import type { AppRouter } from '@/server/api/root'
 import { httpBatchLink, loggerLink } from '@trpc/client'
 import { createTRPCNext } from '@trpc/next'
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 import superjson from 'superjson'
-import type { AppRouter } from '~/server/api/root'
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') return '' // browser should use relative url
@@ -41,15 +41,16 @@ export const api = createTRPCNext<AppRouter>({
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`
         })
-      ]
+      ],
       // react-query options uncomment if you dont want to refetch queries on window focus
-      // queryClientConfig: {
-      //   defaultOptions: {
-      //     queries: {
-      //       refetchOnWindowFocus: false
-      //     }
-      //   }
-      // }
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            refetchOnMount: false
+          }
+        }
+      }
     }
   },
   /**

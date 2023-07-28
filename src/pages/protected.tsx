@@ -1,8 +1,8 @@
+import { getServerAuthSession } from '@/server/auth'
+import { api } from '@/utils/api'
 import type { GetServerSideProps, NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
-import { getServerAuthSession } from '~/server/auth'
-import { api } from '~/utils/api'
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getServerAuthSession(context)
@@ -15,7 +15,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return {
       redirect: {
         notFound: false
-      }
+      },
+      props: {}
     }
   }
 }

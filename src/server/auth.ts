@@ -1,3 +1,5 @@
+import { env } from '@/env.mjs'
+import { prisma } from '@/server/db'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import type { GetServerSidePropsContext } from 'next'
 import {
@@ -6,8 +8,6 @@ import {
   type NextAuthOptions
 } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
-import { env } from '~/env.mjs'
-import { prisma } from '~/server/db'
 
 // type UserRole = 'ADMIN' | 'USER'
 
